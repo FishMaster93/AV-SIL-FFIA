@@ -22,7 +22,7 @@ species arrive one at a time. It does not store historical recordings. It combin
 |---|---|---|
 | Six Guangzhou species: audio (`.wav`, hydrophone, 256 kHz) | **Zenodo: https://doi.org/10.5281/zenodo.21888149** | 43 GB |
 | Six Guangzhou species: video (`.mp4`, 854×480, 25 fps) | **Zenodo: https://doi.org/10.5281/zenodo.23623291** | 28 GB |
-| *O. punctatus* (second farm): audio + video | **Zenodo: https://doi.org/10.5281/zenodo.12759731**, plus Parts 2 ([11060370](https://zenodo.org/records/11060370)) and 3 ([11060195](https://zenodo.org/records/11060195)) | ~80 GB |
+| *O. punctatus* (second farm): audio + video | **Zenodo: https://doi.org/10.5281/zenodo.12759731**, plus Parts 2 ([11060370](https://zenodo.org/records/11060370)) and 3 ([11060195](https://zenodo.org/records/11060195)) | ~100 GB |
 | Pre-extracted features + encoder checkpoints | **Zenodo: https://doi.org/10.5281/zenodo.23619403** | 7 GB |
 | Data splits (clip-level and session-disjoint) | [`data/manifest.csv`](data/manifest.csv) (in this repository) | 24 MB |
 | Hyperparameters selected on the validation set | [`results/selection/`](results/selection) (in this repository) | – |
