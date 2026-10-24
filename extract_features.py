@@ -25,7 +25,7 @@ from scipy.signal import resample
 from torch.utils.data import DataLoader, Dataset
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from datasets.fish_av_incremental import (INCREMENTAL_PHASES, VideoClipDataset,
+from datasets.fish_av_incremental import (DATA_ROOT, INCREMENTAL_PHASES, VideoClipDataset,
                                           build_phase_items)
 from models.s3d import S3D, load_s3d_kinetics
 
@@ -153,7 +153,7 @@ def main():
                            args.save_fmap)
             assert len(feat) == len(items)
             result[split] = {
-                'paths': [it['audio'] for it in items],
+                'paths': [os.path.relpath(it['audio'], DATA_ROOT) for it in items],   # 样本 ID = 相对 DATA_ROOT 的音频路径
                 'labels': torch.tensor([it['label'] for it in items]),
                 'species': [it['species'] for it in items],
                 'feat': feat.half() if args.modality == 'video' else feat,

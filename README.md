@@ -21,7 +21,7 @@ species arrive one at a time. It does not store historical recordings. It combin
 | Resource | Link | Size |
 |---|---|---|
 | AV-SIL-FFIR dataset (audio `.wav` + video) | **Zenodo: https://doi.org/10.5281/zenodo.XXXXXXX** *(placeholder, to be updated)* | – |
-| Pre-extracted features + encoder checkpoints | **Zenodo: https://doi.org/10.5281/zenodo.YYYYYYY** *(placeholder, to be updated)* | ~10 GB |
+| Pre-extracted features + encoder checkpoints | **Zenodo: https://doi.org/10.5281/zenodo.23619403** | 7 GB |
 | Data splits (clip-level and session-disjoint) | [`data/manifest.csv`](data/manifest.csv) (in this repository) | 24 MB |
 | Hyperparameters selected on the validation set | [`results/selection/`](results/selection) (in this repository) | – |
 
@@ -85,8 +85,8 @@ All scripts are run from the repository root.
 
 ## Quick start: run from the released features
 
-1. Download the features and checkpoints from Zenodo. Unpack them in the repository root so that you get
-   `features/` and `workspace/`:
+1. Download the four `.tar` files from [Zenodo](https://doi.org/10.5281/zenodo.23619403) and unpack them in the repository
+   root (`for f in AV-SIL-FFIR_*.tar; do tar -xf "$f"; done`) so that you get `features/` and `workspace/`:
 
    ```
    features/
@@ -101,7 +101,8 @@ All scripts are run from the repository root.
    ```
 
    Each `phase{k}.pt` is a dictionary `{'train'|'val'|'test': {'paths', 'labels', 'species', 'feat'}, 'meta': ...}`.
-   Here `paths` are clip identifiers, `labels` are intensity levels 0–3 and `feat` is an `N × d` tensor.
+   Here `paths` are clip IDs (the audio path relative to the dataset root, as in `data/manifest.csv`), `labels` are
+   intensity levels 0–3 and `feat` is an `N × 1024` tensor.
 
 2. Run HAIL-FFIR with the selected configuration (audio-visual, seed 42):
 

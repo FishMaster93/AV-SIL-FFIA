@@ -25,7 +25,7 @@ import torchvision.transforms.functional as TF
 from torch.utils.data import DataLoader
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from datasets.fish_av_incremental import INCREMENTAL_PHASES, VideoClipDataset, build_av_phase_data
+from datasets.fish_av_incremental import DATA_ROOT, INCREMENTAL_PHASES, VideoClipDataset, build_av_phase_data
 from extract_features import AudioClipDataset, build_audio_model, build_video_model
 from analytic_cil import FEAT_ROOT, load_phase
 from train_phase0_fusion import FusionWithHead
@@ -109,7 +109,7 @@ def main():
         t0 = time.time()
         _, val_items, test_items, _ = build_av_phase_data(ph)   # 只要有视频的配对样本
         test = test_items if args.split == 'test' else val_items
-        paths = [it['audio'] for it in test]
+        paths = [os.path.relpath(it['audio'], DATA_ROOT) for it in test]   # 样本 ID 与 extract_features.py 相同
         labels = torch.tensor([it['label'] for it in test])
         species = [it['species'] for it in test]
         offset = ph * 100000 + (0 if args.split == 'test' else 50000)   # 各阶段/切分样本种子不重叠
