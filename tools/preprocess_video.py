@@ -3,7 +3,7 @@
 的 .npy 文件，目录结构和文件名跟音频数据集一一对应：
 
   广州 (--dataset gz):
-    src: <src>/{date}/{中文物种名}/{强度}/{n}.mp4
+    src: <src>/{date}/{物种名（中文或英文，如 Zenodo 发布版）}/{强度}/{n}.mp4
     dst: <dst>/{date}/{英文物种名}/{强度}/{n}.npy      <-> /data/usb/audio_dataset/{date}/{英文物种名}/{强度}/{n}.wav
   Oplegnathus (--dataset opleg):
     src: <src>/{date}/{AM_40|PM_70|...}/{强度}/13_video_N.mp4
@@ -48,7 +48,7 @@ def list_jobs(dataset, src, dst, species_filter=None, sessions=None):
             continue
         for sub in sorted(os.listdir(date_path)):
             if dataset == 'gz':
-                out_sub = GZ_SPECIES.get(sub)
+                out_sub = GZ_SPECIES.get(sub, sub if sub in GZ_SPECIES.values() else None)   # 中文或英文目录名均可
                 if out_sub is None:
                     print(f'[Warning] 未知物种目录: {date}/{sub}')
                     continue

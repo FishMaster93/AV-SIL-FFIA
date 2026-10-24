@@ -20,7 +20,9 @@ species arrive one at a time. It does not store historical recordings. It combin
 
 | Resource | Link | Size |
 |---|---|---|
-| AV-SIL-FFIR dataset (audio `.wav` + video) | **Zenodo: https://doi.org/10.5281/zenodo.XXXXXXX** *(placeholder, to be updated)* | – |
+| Six Guangzhou species: audio (`.wav`, hydrophone, 256 kHz) | **Zenodo: https://doi.org/10.5281/zenodo.21888149** | 43 GB |
+| Six Guangzhou species: video (`.mp4`, 854×480, 25 fps) | **Zenodo: https://doi.org/10.5281/zenodo.23623291** | 28 GB |
+| *O. punctatus* (second farm): audio + video | **Zenodo: https://doi.org/10.5281/zenodo.12759731**, plus Parts 2 ([11060370](https://zenodo.org/records/11060370)) and 3 ([11060195](https://zenodo.org/records/11060195)) | ~80 GB |
 | Pre-extracted features + encoder checkpoints | **Zenodo: https://doi.org/10.5281/zenodo.23619403** | 7 GB |
 | Data splits (clip-level and session-disjoint) | [`data/manifest.csv`](data/manifest.csv) (in this repository) | 24 MB |
 | Hyperparameters selected on the validation set | [`results/selection/`](results/selection) (in this repository) | – |
@@ -199,6 +201,16 @@ that time goes to the gradient-based baselines and K-S-CI.
 Download the dataset from Zenodo and arrange it as below. You can also point the environment variable `AVSIL_DATA`
 to another directory.
 
+| Source | Destination |
+|---|---|
+| Guangzhou audio archive | `data/raw/gz/audio_dataset/` |
+| Guangzhou video (`video_dataset.tar`) | `data/raw/gz/video_dataset/`; convert it to `.npy` with step 0 below |
+| *O. punctatus* audio | `data/raw/opleg/audio_dataset/` |
+| *O. punctatus* video | convert to `data/raw/opleg/video_npy/` with step 0 below |
+
+The released Guangzhou videos are 480p transcodes of the original 2560×1440 clips. Features extracted from them can
+differ slightly from the released features, so use the released features to reproduce the paper's numbers exactly.
+
 ```
 data/raw/
   gz/audio_dataset/<session>/<Species>/<Intensity>/<n>.wav
@@ -211,7 +223,7 @@ All paths in `data/manifest.csv` are relative to `AVSIL_DATA`.
 
 ```bash
 # 0) (only if you start from .mp4) decode 16 uniformly sampled frames per clip at 224×224
-python tools/preprocess_video.py --dataset gz    --src <mp4_root_gz>    --dst data/raw/gz/video_npy
+python tools/preprocess_video.py --dataset gz    --src data/raw/gz/video_dataset --dst data/raw/gz/video_npy
 python tools/preprocess_video.py --dataset opleg --src <mp4_root_opleg> --dst data/raw/opleg/video_npy
 #    (optional) rebuild the manifest; the released one already contains the paper's splits
 #    python tools/build_manifest.py && python tools/split_manifest.py

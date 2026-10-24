@@ -312,7 +312,7 @@ def per_species_and_curves():
         ours = m == 'hail'
         ax.plot(range(1, 8), curve, color=col, marker=mk, ls=ls, lw=3.0 if ours else 1.6, ms=11 if ours else 7,
                 mec='white' if not ours else col, mew=0.6, zorder=5 if ours else 3,
-                label=NAMES[m].replace(' (ours)', ' (ours)'))
+                label='Joint training' if m == 'joint' else NAMES[m])
     ax.set_xlabel('Incremental stage', fontsize=13)
     ax.set_ylabel('Accuracy on seen species (%)', fontsize=13)
     ax.set_xticks(range(1, 8)); ax.set_xlim(0.8, 7.2)
@@ -333,7 +333,7 @@ def per_species_and_curves():
     for m in ['finetune', 'lwf', 'ewc', 'er', 'icarl_fc', 'avcil', 'acil', 'dsal', 'aqualytic', 'mmal', 'joint', 'hail']:
         if m in main:
             c = np.mean([[h['acc_seen'] for h in r['history']] for r in main[m]], axis=0) * 100
-            rows.append(NAMES[m] + ',' + ','.join(f'{v:.2f}' for v in c))
+            rows.append(('Joint training' if m == 'joint' else NAMES[m]) + ',' + ','.join(f'{v:.2f}' for v in c))
     open(f'{FIG}/accuracy_step_data.csv', 'w').write('method,' + ','.join(f'stage{i}' for i in range(1, 8)) + '\n'
                                                      + '\n'.join(rows) + '\n')
     plt.close(fig)
