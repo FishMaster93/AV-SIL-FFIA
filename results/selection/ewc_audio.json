@@ -1,0 +1,89 @@
+{
+ "method": "ewc",
+ "modality": "audio",
+ "criterion": "0.5*(val clean avg_inc + mean val acc over noise/missing corruptions)",
+ "selection_corruptions": [
+  "a_noise_1",
+  "a_noise_2",
+  "a_noise_3",
+  "a_missing"
+ ],
+ "held_out_corruptions": [
+  "v_blur_1",
+  "v_blur_2",
+  "v_blur_3",
+  "v_occl_1",
+  "v_occl_2",
+  "v_occl_3",
+  "v_haze_1",
+  "v_haze_2",
+  "v_haze_3"
+ ],
+ "best_hp": {
+  "epochs": 10,
+  "lr": 0.001,
+  "ewc": 100000.0
+ },
+ "grid": [
+  {
+   "hp": {
+    "epochs": 10,
+    "lr": 0.001,
+    "ewc": 100.0
+   },
+   "val_avg_inc": 0.6524702988328939,
+   "val_corrupt": {
+    "a_noise_1": 0.3607689996996095,
+    "a_noise_2": 0.3024932412135776,
+    "a_noise_3": 0.2636427355562231,
+    "a_missing": 0.20676879943927104
+   },
+   "S": 0.4679443714050321
+  },
+  {
+   "hp": {
+    "epochs": 10,
+    "lr": 0.001,
+    "ewc": 1000.0
+   },
+   "val_avg_inc": 0.6547227684895931,
+   "val_corrupt": {
+    "a_noise_1": 0.3485531190547712,
+    "a_noise_2": 0.2627415640332432,
+    "a_noise_3": 0.21728246720736957,
+    "a_missing": 0.20676879943927104
+   },
+   "S": 0.4567796279616284
+  },
+  {
+   "hp": {
+    "epochs": 10,
+    "lr": 0.001,
+    "ewc": 10000.0
+   },
+   "val_avg_inc": 0.6577262162306459,
+   "val_corrupt": {
+    "a_noise_1": 0.3563632722539301,
+    "a_noise_2": 0.2946830880144187,
+    "a_noise_3": 0.22048663262240914,
+    "a_missing": 0.20676879943927104
+   },
+   "S": 0.46365083215657654
+  },
+  {
+   "hp": {
+    "epochs": 10,
+    "lr": 0.001,
+    "ewc": 100000.0
+   },
+   "val_avg_inc": 0.6595621996908015,
+   "val_corrupt": {
+    "a_noise_1": 0.3685791528987684,
+    "a_noise_2": 0.3192149794733153,
+    "a_noise_3": 0.31190547712025635,
+    "a_missing": 0.20676879943927104
+   },
+   "S": 0.48058965096185213
+  }
+ ]
+}

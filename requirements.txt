@@ -1,0 +1,9 @@
+# PyTorch / torchvision: install the build matching your CUDA first (tested: torch 2.11, torchvision 0.26)
+numpy>=1.26
+scipy>=1.11
+scikit-learn>=1.4
+matplotlib>=3.8
+pandas>=2.0
+librosa>=0.10
+h5py>=3.10        # K-S-CI visual features only
+av>=12            # tools/preprocess_video.py only (decoding .mp4)

@@ -1,0 +1,59 @@
+{
+ "method": "er",
+ "modality": "video",
+ "criterion": "0.5*(val clean avg_inc + mean val acc over noise/missing corruptions)",
+ "selection_corruptions": [
+  "v_noise_1",
+  "v_noise_2",
+  "v_noise_3",
+  "v_missing"
+ ],
+ "held_out_corruptions": [
+  "v_blur_1",
+  "v_blur_2",
+  "v_blur_3",
+  "v_occl_1",
+  "v_occl_2",
+  "v_occl_3",
+  "v_haze_1",
+  "v_haze_2",
+  "v_haze_3"
+ ],
+ "best_hp": {
+  "epochs": 10,
+  "lr": 0.001,
+  "budget": 2000
+ },
+ "grid": [
+  {
+   "hp": {
+    "epochs": 10,
+    "lr": 0.001,
+    "budget": 2000
+   },
+   "val_avg_inc": 0.8568866059512735,
+   "val_corrupt": {
+    "v_noise_1": 0.44547912285971764,
+    "v_noise_2": 0.31180534695103634,
+    "v_noise_3": 0.23750876138980676,
+    "v_missing": 0.25032542304996497
+   },
+   "S": 0.5840831347569525
+  },
+  {
+   "hp": {
+    "epochs": 30,
+    "lr": 0.001,
+    "budget": 2000
+   },
+   "val_avg_inc": 0.8647281993388444,
+   "val_corrupt": {
+    "v_noise_1": 0.43646740762991887,
+    "v_noise_2": 0.28827475718433965,
+    "v_noise_3": 0.23009912886752779,
+    "v_missing": 0.23100030039050767
+   },
+   "S": 0.5805942989284589
+  }
+ ]
+}
